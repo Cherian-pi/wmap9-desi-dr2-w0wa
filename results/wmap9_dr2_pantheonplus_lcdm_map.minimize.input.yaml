@@ -1,0 +1,89 @@
+theory:
+  camb:
+    extra_args:
+      num_massive_neutrinos: 1
+      dark_energy_model: ppf
+      lens_potential_accuracy: 0
+likelihood:
+  wmap9: !!python/name:wmap9_likelihood.WMAP9 ''
+  bao.desi_dr2.desi_bao_all: null
+  sn.pantheonplus: null
+params:
+  ombh2:
+    prior:
+      min: 0.018
+      max: 0.028
+    ref:
+      dist: norm
+      loc: 0.02253
+      scale: 0.0002
+    proposal: 0.0002
+    latex: \Omega_b h^2
+  omch2:
+    prior:
+      min: 0.08
+      max: 0.16
+    ref:
+      dist: norm
+      loc: 0.11515
+      scale: 0.002
+    proposal: 0.002
+    latex: \Omega_c h^2
+  H0:
+    prior:
+      min: 50.0
+      max: 90.0
+    ref:
+      dist: norm
+      loc: 68.9
+      scale: 0.5
+    proposal: 0.5
+    latex: H_0
+  ns:
+    prior:
+      min: 0.9
+      max: 1.05
+    ref:
+      dist: norm
+      loc: 0.972
+      scale: 0.005
+    proposal: 0.005
+    latex: n_s
+  logA:
+    prior:
+      min: 2.9
+      max: 3.3
+    ref:
+      dist: norm
+      loc: 3.096
+      scale: 0.01
+    proposal: 0.01
+    latex: \ln(10^{10}A_s)
+    drop: true
+  tau:
+    prior:
+      min: 0.04
+      max: 0.2
+    ref:
+      dist: norm
+      loc: 0.088
+      scale: 0.005
+    proposal: 0.005
+    latex: \tau
+  w: -1.0
+  wa: 0.0
+  As:
+    value: 'lambda logA: 1e-10 * np.exp(logA)'
+    latex: A_s
+  mnu: 0.06
+  omk: 0.0
+  omegam:
+    latex: \Omega_m
+  rdrag:
+    latex: r_d
+sampler:
+  minimize:
+    method: bobyqa
+    best_of: 2
+packages_path: /Users/cherianpi/Desktop/Cosmology/data/cobaya_packages
+output: wmap9_dr2_pantheonplus_lcdm_map

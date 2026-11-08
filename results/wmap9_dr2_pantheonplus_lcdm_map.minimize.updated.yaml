@@ -1,0 +1,189 @@
+theory:
+  camb:
+    version: 1.5.5
+    path: null
+    speed: 0.3
+    stop_at_error: false
+    extra_args:
+      num_massive_neutrinos: 1
+      dark_energy_model: ppf
+      lens_potential_accuracy: 0
+    ignore_obsolete: false
+    use_renames: false
+    external_primordial_pk: false
+    renames:
+      omegabh2: ombh2
+      omegach2: omch2
+      omegal: omega_de
+      omegak: omk
+      yhe: YHe
+      yheused: YHe
+      YpBBN: Y_p
+    input_params:
+    - ns
+    - As
+    - ombh2
+    - omch2
+    - H0
+    - tau
+    - w
+    - wa
+    - mnu
+    - omk
+    output_params:
+    - omegam
+    - rdrag
+likelihood:
+  wmap9:
+    type: []
+    speed: -1
+    stop_at_error: false
+    version: null
+    external: !!python/name:wmap9_likelihood.WMAP9 ''
+    input_params: []
+    output_params: []
+  bao.desi_dr2.desi_bao_all:
+    path: null
+    measurements_file: bao_data/desi_bao_dr2/desi_gaussian_bao_ALL_GCcomb_mean.txt
+    cov_file: bao_data/desi_bao_dr2/desi_gaussian_bao_ALL_GCcomb_cov.txt
+    rs_fid: 1
+    aliases:
+    - BAO
+    speed: 2000
+    type: BAO
+    rs_rescale: null
+    prob_dist: null
+    invcov_file: null
+    redshift: null
+    observable_1: null
+    observable_2: null
+    observable_3: null
+    grid_file: null
+    stop_at_error: false
+    version: null
+    input_params: []
+    output_params: []
+  sn.pantheonplus:
+    path: null
+    dataset_file: PantheonPlus/config.dataset
+    dataset_params: null
+    aliases:
+    - PantheonPlus
+    use_abs_mag: false
+    speed: 100
+    type: SN
+    stop_at_error: false
+    version: null
+    input_params: []
+    output_params: []
+params:
+  ombh2:
+    prior:
+      min: 0.018
+      max: 0.028
+    ref:
+      dist: norm
+      loc: 0.02253
+      scale: 0.0002
+    proposal: 0.0002
+    latex: \Omega_b h^2
+    renames:
+    - omegabh2
+  omch2:
+    prior:
+      min: 0.08
+      max: 0.16
+    ref:
+      dist: norm
+      loc: 0.11515
+      scale: 0.002
+    proposal: 0.002
+    latex: \Omega_c h^2
+    renames:
+    - omegach2
+  H0:
+    prior:
+      min: 50.0
+      max: 90.0
+    ref:
+      dist: norm
+      loc: 68.9
+      scale: 0.5
+    proposal: 0.5
+    latex: H_0
+  ns:
+    prior:
+      min: 0.9
+      max: 1.05
+    ref:
+      dist: norm
+      loc: 0.972
+      scale: 0.005
+    proposal: 0.005
+    latex: n_s
+  logA:
+    prior:
+      min: 2.9
+      max: 3.3
+    ref:
+      dist: norm
+      loc: 3.096
+      scale: 0.01
+    proposal: 0.01
+    latex: \ln(10^{10}A_s)
+    drop: true
+  tau:
+    prior:
+      min: 0.04
+      max: 0.2
+    ref:
+      dist: norm
+      loc: 0.088
+      scale: 0.005
+    proposal: 0.005
+    latex: \tau
+  w:
+    value: -1.0
+  wa:
+    value: 0.0
+  As:
+    value: 'lambda logA: 1e-10 * np.exp(logA)'
+    latex: A_s
+    derived: true
+  mnu:
+    value: 0.06
+  omk:
+    value: 0.0
+    renames:
+    - omegak
+  omegam:
+    latex: \Omega_m
+    derived: true
+  rdrag:
+    latex: r_d
+    derived: true
+  chi2__BAO:
+    latex: \chi^2_\mathrm{BAO}
+    derived: true
+  chi2__SN:
+    latex: \chi^2_\mathrm{SN}
+    derived: true
+sampler:
+  minimize:
+    method: bobyqa
+    ignore_prior: false
+    max_evals: 1e6d
+    best_of: 2
+    confidence_for_unbounded: 0.9999995
+    seed: null
+    override_scipy: null
+    override_bobyqa:
+      rhoend: 0.05
+    override_iminuit: null
+    covmat: null
+    covmat_params: null
+    version: null
+    fallback_covmat_scale: 4
+packages_path: /Users/cherianpi/Desktop/Cosmology/data/cobaya_packages
+output: wmap9_dr2_pantheonplus_lcdm_map
+version: 3.5.7

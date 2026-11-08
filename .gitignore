@@ -1,0 +1,19 @@
+# Large or non-redistributable data (download separately)
+data/
+reference_chains/
+*.so
+*.npy
+
+# Cobaya machine-specific files
+*.dill_pickle
+*.checkpoint
+*.locked
+*.lock
+
+# Python / Jupyter / macOS
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+nohup.out
+*.log
+*.html
